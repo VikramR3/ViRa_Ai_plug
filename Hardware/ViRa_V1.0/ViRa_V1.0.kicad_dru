@@ -1,0 +1,36 @@
+(version 1)
+
+# Mains isolation rules for ViRa_V1.0.
+#
+# 230 Vac = 325 V peak, which sits in the 301-500 V band of IPC-2221 Table 6-1:
+# 2.5 mm between uncoated external conductors. The mains-to-SELV crossing is
+# stricter, because the USB-C port and buttons are user-accessible: that wants
+# reinforced insulation, about 5 mm creepage at 230 V / pollution degree 2, with
+# 6.4 mm the usual built value.
+#
+# EXEMPTIONS. K2 (SRD-05VDC relay), U1 (HLK-5M05 isolated PSU) and J1 (MX126-5.0
+# mains terminal) are the rated crossing and entry parts, whose land patterns are
+# fixed by the manufacturer and tighter than these numbers: the SRD puts mains COM
+# 6.26-6.36 mm from its coil pads, J1's 5.00 mm pitch leaves 2.20 mm between
+# adjacent mains pads, and U1's pin spacing gives 2.39 mm. Routing cannot change
+# any of those, and the parts' own construction provides the rated isolation.
+#
+# The exemption requires BOTH items to be inside the SAME courtyard, so it covers
+# only spacing that is genuinely internal to one part's land pattern. An earlier
+# version tested each item separately -- !A.insideCourtyard(X) && !B.insideCourtyard(X)
+# -- which exempted a pair whenever EITHER item so much as clipped ANY listed
+# courtyard. That let a 0.30 mm live-to-neutral gap at RV1 fall through to the
+# netclass fallback, because the neutral track happened to pass through U1's
+# courtyard 15 mm away. Keep the parentheses.
+
+(rule "mains to low-voltage (reinforced barrier)"
+	(constraint clearance (min 6.4mm))
+	(condition "A.NetClass == 'MAINS' && B.NetClass != 'MAINS' && !(A.insideCourtyard('K2') && B.insideCourtyard('K2')) && !(A.insideCourtyard('U1') && B.insideCourtyard('U1')) && !(A.insideCourtyard('J1') && B.insideCourtyard('J1'))"))
+
+(rule "mains to mains (functional, IPC-2221 B2)"
+	(constraint clearance (min 2.5mm))
+	(condition "A.NetClass == 'MAINS' && B.NetClass == 'MAINS' && !(A.insideCourtyard('K2') && B.insideCourtyard('K2')) && !(A.insideCourtyard('U1') && B.insideCourtyard('U1')) && !(A.insideCourtyard('J1') && B.insideCourtyard('J1'))"))
+
+(rule "switched-contact width for 6 A load"
+	(constraint track_width (min 2.3mm))
+	(condition "A.NetName == 'R-C' || A.NetName == 'R-NO'"))

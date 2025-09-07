@@ -1,0 +1,5 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "footprints") (type "KiCad") (uri "/home/kicad/kicad_projects/ViRa_Ai_plug/Hardware/External_Libraries/ul_MLT-8530/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "CH291-1220LF") (type "KiCad") (uri "/home/kicad/kicad_projects/ViRa_Ai_plug/Hardware/External_Libraries/CH291-1220LF") (options "") (descr ""))
+)

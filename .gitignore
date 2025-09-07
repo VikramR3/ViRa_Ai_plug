@@ -1,0 +1,20 @@
+# KiCad local / generated files
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+*.bak
+*.bak-*
+*~
+_autosave-*
+*.kicad_sch-bak
+*.kicad_pcb-bak
+DRC.rpt
+ERC.rpt
+.history/
+logs/
+report.txt
+
+# Specctra exports (regenerate from Pcbnew when needed)
+*.dsn
+*.ses

@@ -1,0 +1,5 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "CH291-1220LF") (type "KiCad") (uri "/home/kicad/kicad_projects/ViRa_Ai_plug/Hardware/External_Libraries/CH291-1220LF/CH291-1220LF.kicad_sym") (options "") (descr ""))
+	(lib (name "2025-08-19_10-53-47") (type "KiCad") (uri "/home/kicad/kicad_projects/ViRa_Ai_plug/Hardware/External_Libraries/ul_MLT-8530/KiCADv6/2025-08-19_10-53-47.kicad_sym") (options "") (descr ""))
+)
